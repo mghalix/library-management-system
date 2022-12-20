@@ -9,6 +9,7 @@ module com.honda.library {
   requires java.sql;
   requires com.jfoenix;
   requires com.google.gson;
+  requires org.apache.commons.codec;
 
   exports com.honda.library.loaders;
   opens com.honda.library.loaders to javafx.fxml;
@@ -17,4 +18,5 @@ module com.honda.library {
   exports com.honda.library.view.controller;
   opens com.honda.library.view.controller to javafx.fxml;
   opens com.honda.library.model;
+  exports com.honda.library.model;
 }

@@ -2,6 +2,7 @@ package com.honda.library.model;
 
 
 import com.google.gson.Gson;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.*;
 import java.util.logging.Level;
@@ -17,7 +18,8 @@ public class Preferences {
   public Preferences() {
     daysWithoutFine = 14;
     finePerDay = 2;
-    username = password = "admin";
+    username = "admin";
+    setPassword("admin");
   }
 
   public static Preferences getPreferences() {
@@ -61,7 +63,7 @@ public class Preferences {
   }
 
   public void setPassword(String password) {
-    this.password = password;
+    this.password = DigestUtils.shaHex(password);
   }
 
   public float getFinePerDay() {
@@ -71,6 +73,7 @@ public class Preferences {
   public void setFinePerDay(float finePerDay) {
     this.finePerDay = finePerDay;
   }
+
   private static Writer writer = null;
 
   public static void initConfig() {
@@ -97,7 +100,6 @@ public class Preferences {
       writer = new FileWriter(CONFIG_FILE);
       Gson gson = new Gson();
       gson.toJson(preferences, writer);
-      AlertMaker.showSimpleAlert("Success", "Settings has been update successfully");
     } catch (IOException ex) {
       getLogger(Preferences.class.getName()).log(Level.SEVERE, null, ex);
       AlertMaker.showErrorMessage(ex, "Failed", "Cannot save configuration file");
@@ -105,6 +107,7 @@ public class Preferences {
       try {
         assert writer != null;
         writer.close();
+        AlertMaker.showSimpleAlert("Success", "Settings has been update successfully");
       } catch (IOException ex) {
         getLogger(Preferences.class.getName()).log(Level.SEVERE, null, ex);
       }

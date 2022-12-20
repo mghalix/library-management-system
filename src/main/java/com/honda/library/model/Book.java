@@ -5,14 +5,14 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Book {
   private final SimpleStringProperty title, id, author, publisher;
-  private final SimpleBooleanProperty available;
+  private final SimpleBooleanProperty availability;
 
   public Book(String title, String id, String author, String publisher, boolean availability) {
     this.title = new SimpleStringProperty(title);
     this.id = new SimpleStringProperty(id);
     this.author = new SimpleStringProperty(author);
     this.publisher = new SimpleStringProperty(publisher);
-    this.available = new SimpleBooleanProperty(availability);
+    this.availability = new SimpleBooleanProperty(availability);
   }
 
   public String getTitle() {
@@ -31,7 +31,7 @@ public class Book {
     return publisher.get();
   }
 
-  public boolean getAvailable() {
-    return available.get();
+  public boolean getAvailability() {
+    return availability.get();
   }
 }

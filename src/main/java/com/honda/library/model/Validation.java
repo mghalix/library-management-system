@@ -17,4 +17,7 @@ public class Validation {
   public static boolean validateID(String id) {
     return (!id.isEmpty() && containsIllegal(id, illegalID));
   }
+  public static boolean validateUsernameLogin(String username) {
+    return false;
+  }
 }

@@ -1,0 +1,43 @@
+.root {
+    -fx-hgap: 20px;
+    -fx-background-image: url("/com/honda/library/images/mountains-medium.jpg");
+
+    /*-fx-padding: 40px;*/
+
+    -fx-background-color: #36454f;
+    /*-fx-border-radius: 50px;*/
+    /*-fx-border-width: 5px;*/
+    -fx-effect: dropshadow(three-pass-box, #0E1D32, 10, 0, 4, 4);
+    -fx-background-insets: 12;
+    -fx-background-radius: 6;
+}
+
+.button {
+    /*-fx-hgap: 50px;*/
+    /*-fx-padding: 4px;*/
+
+    /*-fx-background-radius: 30;*/
+    /*-fx-background-radius: 30 0 0 30;*/
+    /*-fx-border-radius: 50px;*/
+    /*-fx-border-width: 1px;*/
+    /*-fx-border-color: black;*/
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+
+.button:hover {
+    -fx-background-color: "aqua";
+}
+
+.button:pressed {}
+
+.combo-box {}
+
+.combo-box:hover {}
+
+.combo-box:pressed {}
+
+
+
+#btnSignIn {
+}

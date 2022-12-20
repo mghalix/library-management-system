@@ -78,12 +78,12 @@ public class MainController implements Initializable {
 
   @FXML
   void loadBookList(ActionEvent event) throws IOException {
-    loadWindow("/com/honda/library/view/book-list/book-list.fxml", "Add New Member");
+    loadWindow("/com/honda/library/view/book-list/book-list.fxml", "Book List");
   }
 
   @FXML
   void loadMemberList(ActionEvent event) throws IOException {
-    loadWindow("/com/honda/library/view/member-list/member-list.fxml", "Add New Member");
+    loadWindow("/com/honda/library/view/member-list/member-list.fxml", "Member List");
   }
 
   @FXML
@@ -125,7 +125,7 @@ public class MainController implements Initializable {
   void loadBookInfo(ActionEvent event) throws SQLException {
     clearBookCache();
     String id = txtBookID.getText();
-    if(Validation.validateID(id)) {
+    if (Validation.validateID(id)) {
       AlertMaker.showWarningMessage(null, "Use of forbidden character");
       return;
     }
@@ -149,7 +149,7 @@ public class MainController implements Initializable {
   void loadMemberInfo(ActionEvent event) throws SQLException {
     clearMemberCache();
     String id = txtMemberID.getText();
-    if(Validation.validateID(id)) {
+    if (Validation.validateID(id)) {
       AlertMaker.showWarningMessage(null, "Use of forbidden character");
       return;
     }
@@ -188,7 +188,7 @@ public class MainController implements Initializable {
       AlertMaker.showWarningMessage(null, "Sorry the book you are trying to issue is currently unavailable");
       return;
     }
-    if(Validation.validateName(bookID) || Validation.validateName(memberID)) {
+    if (Validation.validateName(bookID) || Validation.validateName(memberID)) {
       AlertMaker.showWarningMessage(null, "Use of forbidden character");
       return;
     }
