@@ -1,0 +1,10 @@
+#xo {
+    /*color: aqua;*/
+    --fxbackground-color: aqua;
+}
+
+#xo {
+    /*--fxbackground-color: blue;*/
+    --mfxbackground-color: red;
+    background-color: blue;
+}
