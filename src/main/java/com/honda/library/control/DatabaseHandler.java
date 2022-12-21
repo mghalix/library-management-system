@@ -36,7 +36,7 @@ public class DatabaseHandler {
   }
 
   void setUpBookTable() throws SQLException {
-    String TABLE_NAME = "books";
+    final String TABLE_NAME = "books";
     stmt = conn.createStatement();
     DatabaseMetaData dbm = conn.getMetaData();
     ResultSet tables = dbm.getTables(null, null, TABLE_NAME, null);
