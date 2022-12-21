@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="272.0" prefWidth="363.0" stylesheets="@settings.css" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.honda.library.view.controller.Settings">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.honda.library.view.controller.settings.Settings">
     <VBox prefHeight="308.0" prefWidth="501.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
           AnchorPane.topAnchor="0.0">
         <MFXTextField fx:id="txtDaysWithoutFine"

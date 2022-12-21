@@ -6,49 +6,42 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="root" styleClass="root" stylesheets="@login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.honda.library.view.controller.Login">
-    <BorderPane layoutY="270.0" prefHeight="694.0" prefWidth="1068.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <center>
-            <VBox prefHeight="271.0" prefWidth="375.0" BorderPane.alignment="CENTER">
-                <BorderPane.margin>
-                    <Insets bottom="50.0" left="340.0" right="340.0" top="50.0" />
-                </BorderPane.margin>
-                <MFXTextField fx:id="txtUser" floatingText="Username" prefHeight="51.0" prefWidth="386.0" promptText="Enter username">
-                    <VBox.margin>
-                        <Insets left="20.0" right="20.0" top="120.0" />
-                    </VBox.margin>
-                    <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                    </cursor>
-                </MFXTextField>
-            <MFXPasswordField fx:id="txtPass" floatingText="Password" prefHeight="51.0" prefWidth="417.0" promptText="Enter password">
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="10.0" />
-               </VBox.margin>
-            </MFXPasswordField>
-                <HBox alignment="CENTER" prefHeight="54.0" prefWidth="388.0">
-                    <VBox.margin>
-                        <Insets top="40.0" />
-                    </VBox.margin>
-                    <MFXButton fx:id="btnSignIn" onAction="#btnSignIn_Click" prefHeight="81.0" prefWidth="450.0" text="Login">
-                        <cursor>
-                            <Cursor fx:constant="HAND" />
-                        </cursor>
-                    </MFXButton>
-                    <MFXButton fx:id="btnSignUp" onAction="#btnSignUp_Click" prefHeight="81.0" prefWidth="450.0" text="Signup">
-                        <cursor>
-                            <Cursor fx:constant="HAND" />
-                        </cursor>
-                    </MFXButton>
-                </HBox>
-                <cursor>
-                    <Cursor fx:constant="DEFAULT" />
-                </cursor>
-            </VBox>
-        </center>
-    </BorderPane>
+<AnchorPane maxWidth="1205.0" prefHeight="694.0" prefWidth="1037.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.honda.library.view.controller.login.Login">
+    <VBox alignment="CENTER" layoutX="489.0" prefHeight="694.0" prefWidth="593.0">
+        <MFXTextField fx:id="txtUser" floatingText="Username" prefHeight="51.0" prefWidth="418.0"
+                      promptText="Enter username">
+            <cursor>
+                <Cursor fx:constant="DEFAULT"/>
+            </cursor>
+       <VBox.margin>
+           <Insets left="80.0" right="80.0"/>
+       </VBox.margin>
+        </MFXTextField>
+        <MFXPasswordField fx:id="txtPass" floatingText="Password" prefHeight="51.0" prefWidth="417.0"
+                          promptText="Enter password">
+           <VBox.margin>
+               <Insets left="70.0" right="70.0" top="10.0"/>
+           </VBox.margin>
+        </MFXPasswordField>
+        <MFXButton fx:id="btnSignIn" onAction="#btnSignIn_Click" prefHeight="40.0" prefWidth="168.0" text="Login">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+      <VBox.margin>
+          <Insets top="10.0"/>
+      </VBox.margin>
+        </MFXButton>
+        <MFXButton fx:id="btnSignUp" onAction="#btnSignUp_Click" prefHeight="37.0" prefWidth="68.0" text="Signup">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+      <VBox.margin>
+          <Insets top="10.0"/>
+      </VBox.margin>
+        </MFXButton>
+    </VBox>
+   <Pane id="pnRoot" layoutX="-1.0" prefHeight="694.0" prefWidth="490.0" />
 </AnchorPane>

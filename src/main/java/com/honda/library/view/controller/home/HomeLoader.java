@@ -1,7 +1,6 @@
-package com.honda.library;
+package com.honda.library.view.controller.home;
 
 import com.honda.library.control.DatabaseHandler;
-import com.honda.library.view.controller.ui.assistant.AssistantUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,15 +10,15 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public class App extends Application {
+public class HomeLoader extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
-    Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("view/login/login.fxml")));
+    Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/honda/library/view/home/home.fxml")));
 
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
+    primaryStage.setTitle("Home");
     primaryStage.show();
-    AssistantUtil.setStageIcon(primaryStage);
 
     // to reduce overhead time when clicking on buttons
     new Thread(() -> {
@@ -30,6 +29,7 @@ public class App extends Application {
       }
     }).start();
   }
+
   public static void main(String[] args) {
     launch(args);
   }

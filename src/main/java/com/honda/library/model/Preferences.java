@@ -63,7 +63,11 @@ public class Preferences {
   }
 
   public void setPassword(String password) {
-    this.password = DigestUtils.shaHex(password);
+    if(password.length() < 16) {
+      this.password = DigestUtils.shaHex(password);
+      return;
+    }
+    this.password = password;
   }
 
   public float getFinePerDay() {

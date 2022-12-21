@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="319.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.honda.library.view.controller.BookAdd">
+            fx:controller="com.honda.library.view.controller.add_book.BookAdd">
     <VBox prefHeight="469.0" prefWidth="494.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <MFXTextField fx:id="txtTitle" floatMode="ABOVE" floatingTextGap="0.0" prefHeight="51.0" prefWidth="883.0"

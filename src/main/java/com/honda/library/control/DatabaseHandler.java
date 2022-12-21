@@ -1,5 +1,8 @@
 package com.honda.library.control;
 
+import com.honda.library.model.AlertMaker;
+import com.honda.library.model.Book;
+
 import javax.swing.*;
 import java.sql.*;
 
@@ -23,8 +26,13 @@ public class DatabaseHandler {
     return handler;
   }
 
-  void createConnection() throws SQLException {
-    conn = DriverManager.getConnection(DB_URL, username, password);
+  void createConnection() {
+    try {
+      conn = DriverManager.getConnection(DB_URL, username, password);
+    } catch (SQLException e) {
+      AlertMaker.showErrorMessage("Database Error", "Cannot load database");
+      e.printStackTrace();
+    }
   }
 
   void setUpBookTable() throws SQLException {
@@ -57,10 +65,10 @@ public class DatabaseHandler {
     return result;
   }
 
-  public boolean execAction(String query) {
+  public boolean execAction(String axn) {
     try {
       stmt = conn.createStatement();
-      stmt.execute(query);
+      stmt.execute(axn);
       return true;
     } catch (SQLException ex) {
       JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Error Occurred", JOptionPane.ERROR_MESSAGE);
@@ -68,6 +76,7 @@ public class DatabaseHandler {
       return false;
     }
   }
+
   public boolean idExists(String id, String tableName) throws SQLException {
     stmt = conn.createStatement();
     ResultSet rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE id='" + id + "'");
@@ -108,5 +117,37 @@ public class DatabaseHandler {
             + "FOREIGN KEY (book_id) REFERENCES books(id),\n"
             + "FOREIGN KEY (member_id) REFERENCES members(id)"
             + ")");
+  }
+
+  public boolean deleteBook(Book book) {
+    try {
+      String delStmt = "DELETE FROM books WHERE id = ?";
+      PreparedStatement stmt = conn.prepareStatement(delStmt);
+      stmt.setString(1, book.getId());
+      int res = stmt.executeUpdate();
+      if (res == 1)
+        return true;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return false;
+  }
+
+  public boolean isBookIssued(Book book) {
+    String query = "SELECT COUNT(*) FROM issues WHERE book_id = ?";
+    try {
+      PreparedStatement checkStmt = conn.prepareStatement(query);
+      checkStmt.setString(1, book.getId());
+      ResultSet rs = checkStmt.executeQuery();
+      if (!rs.next()) {
+        return false;
+      }
+      int count = rs.getInt(1);
+      System.out.println(count);
+      return (count > 0);
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+    return false;
   }
 }

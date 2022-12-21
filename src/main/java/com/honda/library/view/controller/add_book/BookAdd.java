@@ -1,7 +1,8 @@
-package com.honda.library.view.controller;
+package com.honda.library.view.controller.add_book;
 
 import com.honda.library.control.DatabaseHandler;
 import com.honda.library.model.AlertMaker;
+import com.honda.library.model.Book;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
@@ -82,5 +83,15 @@ public class BookAdd {
       String title = res.getString("title");
       System.out.println(title);
     }
+  }
+  public void inflateUI(Book book) {
+    txtTitle.setText(book.getTitle());
+    txtId.setText(book.getId());
+    txtAuthor.setText(book.getAuthor());
+    txtPublisher.setText(book.getPublisher());
+    txtId.setEditable(false);
+//    if(Modes.EDIT) {
+//
+//    }
   }
 }

@@ -1,7 +1,8 @@
-package com.honda.library.view.controller;
+package com.honda.library.view.controller.login;
 
 import com.honda.library.model.AlertMaker;
 import com.honda.library.model.Preferences;
+import com.honda.library.view.controller.ui.assistant.AssistantUtil;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Login implements Initializable {
@@ -40,24 +42,28 @@ public class Login implements Initializable {
       AlertMaker.showErrorMessage("Invalid Credentials", "Wrong username or password, please try again");
       return;
     }
-    ((Stage)txtUser.getScene().getWindow()).close();
-    loadMain();
+    ((Stage) txtUser.getScene().getWindow()).close();
+    loadWindow("/com/honda/library/view/home/home.fxml", "Home");
   }
 
   @FXML
   void btnSignUp_Click(ActionEvent event) {
 
   }
-  void loadMain() throws IOException {
-    Parent parent = FXMLLoader.load(getClass().getResource("/com/honda/library/view/main/main.fxml"));
+
+  void loadWindow(String location, String title) throws IOException {
+    Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(location)));
     Stage stage = new Stage(StageStyle.DECORATED);
-    stage.setTitle("Home");
+    stage.setTitle(title);
     stage.setScene(new Scene(parent));
     stage.show();
+    AssistantUtil.setStageIcon(stage);
   }
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     preferences = Preferences.getPreferences();
   }
+
+
 }

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="paneRoot" prefHeight="309.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.honda.library.view.controller.MemberAdd">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.honda.library.view.controller.add_member.MemberAdd">
     <VBox prefHeight="328.0" prefWidth="494.0">
         <MFXTextField fx:id="txtName" floatMode="ABOVE" floatingTextGap="0.0" prefHeight="51.0"
                       prefWidth="883.0" promptText="Name">

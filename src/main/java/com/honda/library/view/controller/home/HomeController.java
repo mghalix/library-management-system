@@ -1,4 +1,4 @@
-package com.honda.library.view.controller;
+package com.honda.library.view.controller.home;
 
 import com.honda.library.control.DatabaseHandler;
 import com.honda.library.model.AlertMaker;
@@ -17,6 +17,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -30,7 +31,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable {
+public class HomeController implements Initializable {
   @FXML
   private HBox hbxBookInfo;
 
@@ -60,6 +61,9 @@ public class MainController implements Initializable {
 
   @FXML
   MFXTextField txtBookID2;
+
+  @FXML
+  private StackPane pnRoot;
 
   @FXML
   private ListView<String> lsvIssueData;
@@ -319,5 +323,37 @@ public class MainController implements Initializable {
     }
     AlertMaker.showSimpleAlert("Renewal Successful", "The book has been renewed successfully");
     loadBookInfo2(event); // to refresh the list view
+  }
+
+
+  @FXML
+  void mnuClose(ActionEvent event) {
+    ((Stage) pnRoot.getScene().getWindow()).close();
+  }
+
+  @FXML
+  void mnuAddMember(ActionEvent event) throws IOException {
+    loadAddMember(event);
+  }
+
+  @FXML
+  void mnuAddBook(ActionEvent event) throws IOException {
+    loadAddBook(event);
+  }
+
+  @FXML
+  void mnuViewBook(ActionEvent event) throws IOException {
+    loadBookList(event);
+  }
+
+  @FXML
+  void mnuViewMember(ActionEvent event) throws IOException {
+    loadMemberList(event);
+  }
+
+  @FXML
+  void mnuFullscreen(ActionEvent event) {
+    Stage stage = ((Stage) pnRoot.getScene().getWindow());
+    stage.setFullScreen(!stage.isFullScreen());
   }
 }

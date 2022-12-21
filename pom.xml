@@ -85,7 +85,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.honda.library/com.honda.library.loaders.BookAddLoader</mainClass>
+                            <mainClass>com.honda.library/com.honda.library.view.controller.add_book.BookAddLoader</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

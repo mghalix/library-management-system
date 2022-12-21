@@ -1,4 +1,4 @@
-package com.honda.library.view.controller;
+package com.honda.library.view.controller.settings;
 
 import com.honda.library.model.Preferences;
 import io.github.palexdev.materialfx.controls.MFXButton;

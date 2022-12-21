@@ -1,4 +1,4 @@
-package com.honda.library.view.controller;
+package com.honda.library.view.controller.add_member;
 
 import com.honda.library.control.DatabaseHandler;
 import com.honda.library.model.AlertMaker;

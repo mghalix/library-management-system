@@ -1,4 +1,4 @@
-package com.honda.library.loaders;
+package com.honda.library.view.controller.login;
 
 import com.honda.library.control.DatabaseHandler;
 import javafx.application.Application;
@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class Login extends Application {
+public class LoginLoader extends Application {
     @Override
     public void start(Stage stage) throws IOException {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/honda/library/view/login/login.fxml"));

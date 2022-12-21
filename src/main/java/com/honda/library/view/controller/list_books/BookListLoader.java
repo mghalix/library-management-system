@@ -1,4 +1,4 @@
-package com.honda.library.loaders;
+package com.honda.library.view.controller.list_books;
 
 import com.honda.library.control.DatabaseHandler;
 import javafx.application.Application;
@@ -10,16 +10,16 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public class SettingsLoader extends Application {
+public class BookListLoader extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
-    Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/honda/library/view/settings/settings.fxml")));
+    Parent root = FXMLLoader.load(Objects.requireNonNull(BookListLoader.class.getResource("/com/honda/library/view/book-list/book-list.fxml")));
 
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
-    primaryStage.setTitle("Library Settings");
+    primaryStage.setTitle("Book List");
     primaryStage.show();
-    // to reduce overhead time when clicking on buttons
+
     new Thread(() -> {
       try {
         DatabaseHandler.getInstance();
@@ -27,8 +27,5 @@ public class SettingsLoader extends Application {
         throw new RuntimeException(e);
       }
     }).start();
-  }
-  public static void main(String[] args) {
-    launch(args);
   }
 }
