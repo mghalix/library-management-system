@@ -106,7 +106,7 @@ public class Preferences {
       gson.toJson(preferences, writer);
     } catch (IOException ex) {
       getLogger(Preferences.class.getName()).log(Level.SEVERE, null, ex);
-      AlertMaker.showErrorMessage(ex, "Failed", "Cannot save configuration file");
+      AlertMaker.showErrorMessage("Failed", "Cannot Save configuration file");
     } finally {
       try {
         assert writer != null;

@@ -65,13 +65,13 @@ public class BookList implements Initializable {
   private void loadData() throws SQLException {
     DatabaseHandler handler = DatabaseHandler.getInstance();
     String query = "SELECT * FROM books";
-    ResultSet res = handler.execQuery(query);
-    while (res.next()) {
-      String id = res.getString("id");
-      String title = res.getString("title");
-      String author = res.getString("author");
-      String publisher = res.getString("publisher");
-      boolean availability = res.getBoolean("availability");
+    ResultSet rs = handler.execQuery(query);
+    while (rs.next()) {
+      String id = rs.getString("id");
+      String title = rs.getString("title");
+      String author = rs.getString("author");
+      String publisher = rs.getString("publisher");
+      boolean availability = rs.getBoolean("availability");
 
       list.add(new Book(title, id, author, publisher, availability));
     }
@@ -118,6 +118,7 @@ public class BookList implements Initializable {
 
   @FXML
   private void mnuEdit(ActionEvent event) throws IOException {
+    // TODO fix this method
     // fetching the selected row
     Book selectedForEdit = tblBookList.getSelectionModel().getSelectedItem();
     if (selectedForEdit == null) {
@@ -133,8 +134,5 @@ public class BookList implements Initializable {
     stage.setScene(new Scene(root));
     stage.setTitle("Edit Book");
     stage.show();
-
-
-
   }
 }

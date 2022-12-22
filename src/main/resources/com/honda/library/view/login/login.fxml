@@ -11,35 +11,25 @@
 
 <AnchorPane maxWidth="1205.0" prefHeight="694.0" prefWidth="1037.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.honda.library.view.controller.login.Login">
     <VBox alignment="CENTER" layoutX="489.0" prefHeight="694.0" prefWidth="593.0">
-        <MFXTextField fx:id="txtUser" floatingText="Username" prefHeight="51.0" prefWidth="418.0"
-                      promptText="Enter username">
+        <MFXTextField fx:id="txtUser" floatingText="Username" prefHeight="51.0" prefWidth="418.0" promptText="Enter username">
             <cursor>
-                <Cursor fx:constant="DEFAULT"/>
+                <Cursor fx:constant="DEFAULT" />
             </cursor>
        <VBox.margin>
-           <Insets left="80.0" right="80.0"/>
+           <Insets left="80.0" right="80.0" />
        </VBox.margin>
         </MFXTextField>
-        <MFXPasswordField fx:id="txtPass" floatingText="Password" prefHeight="51.0" prefWidth="417.0"
-                          promptText="Enter password">
+        <MFXPasswordField fx:id="txtPass" floatingText="Password" prefHeight="51.0" prefWidth="417.0" promptText="Enter password">
            <VBox.margin>
-               <Insets left="70.0" right="70.0" top="10.0"/>
+               <Insets left="70.0" right="70.0" top="10.0" />
            </VBox.margin>
         </MFXPasswordField>
         <MFXButton fx:id="btnSignIn" onAction="#btnSignIn_Click" prefHeight="40.0" prefWidth="168.0" text="Login">
             <cursor>
-                <Cursor fx:constant="HAND"/>
+                <Cursor fx:constant="HAND" />
             </cursor>
       <VBox.margin>
-          <Insets top="10.0"/>
-      </VBox.margin>
-        </MFXButton>
-        <MFXButton fx:id="btnSignUp" onAction="#btnSignUp_Click" prefHeight="37.0" prefWidth="68.0" text="Signup">
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
-      <VBox.margin>
-          <Insets top="10.0"/>
+          <Insets top="10.0" />
       </VBox.margin>
         </MFXButton>
     </VBox>

@@ -21,13 +21,8 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Login implements Initializable {
-
   @FXML
   private MFXButton btnSignIn;
-
-  @FXML
-  private MFXButton btnSignUp;
-
   @FXML
   private MFXTextField txtPass;
   @FXML
@@ -44,11 +39,6 @@ public class Login implements Initializable {
     }
     ((Stage) txtUser.getScene().getWindow()).close();
     loadWindow("/com/honda/library/view/home/home.fxml", "Home");
-  }
-
-  @FXML
-  void btnSignUp_Click(ActionEvent event) {
-
   }
 
   void loadWindow(String location, String title) throws IOException {
