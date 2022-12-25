@@ -39,8 +39,8 @@
     </VBox>
     <HBox layoutY="308.0" prefHeight="56.0" prefWidth="501.0">
         <MFXButton fx:id="btnSave" onAction="#btnSave_Click" prefHeight="200.0" prefWidth="400.0"
-                   stylesheets="@../global.css" text="Save"/>
+                   stylesheets="@../../styles/global.css" text="Save"/>
         <MFXButton fx:id="btnCancel" onAction="#btnCancel_Click" prefHeight="200.0" prefWidth="400.0"
-                   stylesheets="@../global.css" text="Cancel"/>
+                   stylesheets="@../../styles/global.css" text="Cancel"/>
     </HBox>
 </AnchorPane>

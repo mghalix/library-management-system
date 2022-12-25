@@ -3,6 +3,8 @@ package com.honda.library.view.controller.add_book;
 import com.honda.library.control.DatabaseHandler;
 import com.honda.library.model.AlertMaker;
 import com.honda.library.model.Book;
+import com.honda.library.model.Modes;
+import com.honda.library.view.controller.list_books.BookList;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
@@ -14,8 +16,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class BookAdd {
+  private Modes mode;
+
   @FXML
-  private void btnCancel_Click(ActionEvent event) {
+  private void btnCancel_Click(ActionEvent event) throws SQLException {
     Stage stage = (Stage) rootPane.getScene().getWindow();
     stage.close();
   }
@@ -27,26 +31,35 @@ public class BookAdd {
     title = txtTitle.getText();
     author = txtAuthor.getText();
     publisher = txtPublisher.getText();
-    if (databaseHandler.idExists(id, "books")) {
-      AlertMaker.showErrorMessage("Book adding failure", "Book with id " + id + " and name " + title + " already exists");
-      return;
-    }
     if (id.isEmpty() || title.isEmpty() || author.isEmpty() || publisher.isEmpty()) {
       AlertMaker.showErrorMessage(null, "Please enter in all the fields");
       return;
     }
-    String query = "INSERT INTO books VALUES("
-            + "'" + id + "',"
-            + "'" + title + "',"
-            + "'" + author + "',"
-            + "'" + publisher + "',"
-            + "" + "true" + ""
-            + ")";
+    if (mode == Modes.EDIT) {
+      handleEditOperation();
+      return;
+    }
+    String query =
+            "INSERT INTO books VALUES(" + "'" + id + "'," + "'" + title + "',"
+                    + "'" + author + "'," + "'" + publisher + "'," + "" +
+                    "true" + "" + ")";
     if (!databaseHandler.execAction(query)) {
       AlertMaker.showErrorMessage(null, "Failed");
       return;
     }
-    AlertMaker.showSimpleAlert(null, "Book " + title + " has been added successfully!");
+    AlertMaker.showSimpleAlert(null, "Book " + title + " has been added " +
+            "successfully!");
+  }
+
+  private void handleEditOperation() {
+    Book book = new Book(txtTitle.getText(), txtId.getText(),
+            txtAuthor.getText(), txtPublisher.getText(), true);
+    if (!databaseHandler.updateBook(book)) {
+      AlertMaker.showErrorMessage("Failed", "Cannot update book " + book.getTitle());
+      return;
+    }
+    AlertMaker.showSimpleAlert("Success", "Book " + book.getTitle() + " has" +
+            " been updated");
   }
 
   @FXML
@@ -84,14 +97,13 @@ public class BookAdd {
       System.out.println(title);
     }
   }
+
   public void inflateUI(Book book) {
     txtTitle.setText(book.getTitle());
     txtId.setText(book.getId());
     txtAuthor.setText(book.getAuthor());
     txtPublisher.setText(book.getPublisher());
     txtId.setEditable(false);
-//    if(Modes.EDIT) {
-//
-//    }
+    mode = Modes.EDIT;
   }
 }

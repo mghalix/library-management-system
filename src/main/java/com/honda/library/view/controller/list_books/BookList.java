@@ -4,6 +4,7 @@ import com.honda.library.control.DatabaseHandler;
 import com.honda.library.model.AlertMaker;
 import com.honda.library.model.Book;
 import com.honda.library.view.controller.add_book.BookAdd;
+import com.honda.library.view.controller.ui.assistant.AssistantUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -52,7 +53,9 @@ public class BookList implements Initializable {
   @FXML
   private TableView<Book> tblBookList;
 
-  @Override // initialize method is called after all @FXML annotated members have been injected, unlike constructor.
+  @Override
+  // initialize method is called after all @FXML annotated members have been
+  // injected, unlike constructor.
   public void initialize(URL url, ResourceBundle resourceBundle) {
     initCol();
     try {
@@ -63,6 +66,7 @@ public class BookList implements Initializable {
   }
 
   private void loadData() throws SQLException {
+    list.clear();
     DatabaseHandler handler = DatabaseHandler.getInstance();
     String query = "SELECT * FROM books";
     ResultSet rs = handler.execQuery(query);
@@ -83,49 +87,59 @@ public class BookList implements Initializable {
     colID.setCellValueFactory(new PropertyValueFactory<>("id"));
     colAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
     colPublisher.setCellValueFactory(new PropertyValueFactory<>("publisher"));
-    colAvailability.setCellValueFactory(new PropertyValueFactory<>("availability"));
+    colAvailability.setCellValueFactory(new PropertyValueFactory<>(
+            "availability"));
   }
 
 
   @FXML
   void mnuDelete(ActionEvent event) throws SQLException {
     // fetching the selected row
-    Book selectedForDeletion = tblBookList.getSelectionModel().getSelectedItem();
+    Book selectedForDeletion =
+            tblBookList.getSelectionModel().getSelectedItem();
     if (selectedForDeletion == null) {
-      AlertMaker.showWarningMessage("No Book Selected", "Please select a book for deletion");
+      AlertMaker.showWarningMessage("No Book Selected", "Please select a " +
+              "book" + " for deletion");
       return;
     }
 
     if (DatabaseHandler.getInstance().isBookIssued(selectedForDeletion)) {
-      AlertMaker.showWarningMessage("Book Deletion Error", "This book is already issued and cannot be deleted");
+      AlertMaker.showWarningMessage("Book Deletion Error", "This book is " +
+              "already issued and cannot be deleted");
       return;
     }
 
-    Optional<ButtonType> response = AlertMaker.showConfirmationMessage("Deleting Book", "Are you sure you want to delete the book " + selectedForDeletion.getTitle() + "?");
+    Optional<ButtonType> response = AlertMaker.showConfirmationMessage(
+            "Deleting Book",
+            "Are you sure you want to delete the book " + selectedForDeletion.getTitle() + "?");
     if (response.orElse(null) != ButtonType.OK) {
       return;
     }
 
     boolean res = DatabaseHandler.getInstance().deleteBook(selectedForDeletion);
     if (!res) {
-      AlertMaker.showErrorMessage("Failed", selectedForDeletion.getTitle() + " could not be deleted");
+      AlertMaker.showErrorMessage("Failed", selectedForDeletion.getTitle() +
+              " could not be deleted");
       return;
     }
 
-    AlertMaker.showSimpleAlert("Book deleted", selectedForDeletion.getTitle() + " was deleted successfully");
+    AlertMaker.showSimpleAlert("Book deleted",
+            selectedForDeletion.getTitle() + " was deleted successfully");
     list.remove(selectedForDeletion);
   }
 
   @FXML
   private void mnuEdit(ActionEvent event) throws IOException {
-    // TODO fix this method
     // fetching the selected row
     Book selectedForEdit = tblBookList.getSelectionModel().getSelectedItem();
     if (selectedForEdit == null) {
-      AlertMaker.showWarningMessage("No Book Selected", "Please select a book for deletion");
+      AlertMaker.showWarningMessage("No Book Selected", "Please select a " +
+              "book" + " for update");
       return;
     }
-    FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/com/honda/library/view/book-add/book-add.fxml")));
+    FXMLLoader loader =
+            new FXMLLoader(Objects.requireNonNull(getClass().getResource(
+                    "/com/honda/library/view/book-add/book-add.fxml")));
     Parent root = loader.load();
     BookAdd controller = loader.getController();
     controller.inflateUI(selectedForEdit);
@@ -134,5 +148,18 @@ public class BookList implements Initializable {
     stage.setScene(new Scene(root));
     stage.setTitle("Edit Book");
     stage.show();
+    AssistantUtil.setStageIcon(stage);
+    stage.setOnCloseRequest((e) -> {
+      try {
+        mnuRefresh(new ActionEvent());
+      } catch (SQLException ex) {
+        throw new RuntimeException(ex);
+      }
+    });
+  }
+
+  public void mnuRefresh(ActionEvent event) throws SQLException {
+    loadData();
   }
 }
+

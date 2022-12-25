@@ -1,8 +1,6 @@
 package com.honda.library.model;
 
-import com.honda.library.App;
-
-public class AppUser {
+public class Admin {
   private String name;
   private String username;
   private String password;

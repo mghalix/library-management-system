@@ -5,6 +5,8 @@ import com.honda.library.model.AlertMaker;
 import com.honda.library.model.Validation;
 import com.jfoenix.effects.JFXDepthManager;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -112,7 +114,17 @@ public class HomeController implements Initializable {
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
+//    txtMemberID.focusedProperty().addListener((obs, oldVal, newVal) -> {
+//      if (!newVal) {
+//        try {
+//          loadBookInfo(new ActionEvent());
+//        } catch (Exception e) {
+//          System.out.println("Error");;
+//        }
+//      }
+//    });
   }
+
 
   void clearBookCache() {
     txtBookName.setText("");
@@ -196,11 +208,7 @@ public class HomeController implements Initializable {
       AlertMaker.showWarningMessage(null, "Use of forbidden character");
       return;
     }
-    Optional<ButtonType> response = AlertMaker.showConfirmationMessage("Confirm Issue Operation",
-            "Are you sure you want to issue book " +
-                    txtBookName.getText() + " to "
-                    + txtMemberName.getText() + "?"
-    );
+    Optional<ButtonType> response = AlertMaker.showConfirmationMessage("Confirm Issue Operation", "Are you sure you want to issue book " + txtBookName.getText() + " to " + txtMemberName.getText() + "?");
     if (response.orElse(null) != ButtonType.OK) return;
 
     if (!issueBook(bookID, memberID)) {
@@ -244,9 +252,9 @@ public class HomeController implements Initializable {
 
       issueData.add("Issue Date and Time: " + issueTime.toString());
       issueData.add("Renew Count: " + renewCount);
-      issueData.add("Book Information:-");
 
       // fetching book data from books table
+      issueData.add("Book Information:-");
       query = "SELECT * FROM books WHERE id = '" + bookID + "'";
       ResultSet rs2 = databaseHandler.execQuery(query);
 

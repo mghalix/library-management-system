@@ -10,7 +10,10 @@ module com.honda.library {
   requires com.jfoenix;
   requires com.google.gson;
   requires org.apache.commons.codec;
-
+  requires org.kordamp.ikonli.fontawesome5;
+  requires org.kordamp.ikonli.feather;
+  requires org.kordamp.ikonli.javafx;
+  
   exports com.honda.library;
   opens com.honda.library to javafx.fxml;
   opens com.honda.library.model;

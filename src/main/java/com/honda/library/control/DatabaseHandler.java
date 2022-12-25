@@ -2,13 +2,16 @@ package com.honda.library.control;
 
 import com.honda.library.model.AlertMaker;
 import com.honda.library.model.Book;
+import com.honda.library.model.Member;
+import com.honda.library.view.controller.add_member.MemberAdd;
 
 import javax.swing.*;
 import java.sql.*;
 
 public class DatabaseHandler {
   private static DatabaseHandler handler = null;
-  private static final String DB_URL = "jdbc:mysql://localhost:3306/library", username = "root", password = "3791";
+  private static final String DB_URL = "jdbc:mysql://localhost:3306/library",
+          username = "root", password = "3791";
   private static Connection conn = null;
   private static Statement stmt = null;
 
@@ -26,6 +29,22 @@ public class DatabaseHandler {
     return handler;
   }
 
+  public static boolean updateMember(Member member) {
+    try {
+      String updateMemberStatement = "UPDATE members SET name=?, mobile=?, " +
+              "email=? WHERE id=?";
+      PreparedStatement stmt = conn.prepareStatement(updateMemberStatement);
+      stmt.setString(1, member.getName());
+      stmt.setString(2, member.getMobile());
+      stmt.setString(3, member.getEmail());
+      stmt.setString(4, member.getId());
+      int res = stmt.executeUpdate();
+      return (res > 0);
+    } catch (SQLException e) {
+      return false;
+    }
+  }
+
   void createConnection() {
     try {
       conn = DriverManager.getConnection(DB_URL, username, password);
@@ -41,7 +60,8 @@ public class DatabaseHandler {
     DatabaseMetaData dbm = conn.getMetaData();
     ResultSet tables = dbm.getTables(null, null, TABLE_NAME, null);
     if (tables.next()) {
-      System.out.println("Table " + TABLE_NAME + " already exists. Ready to go!");
+      System.out.println("Table " + TABLE_NAME + " already exists. Ready to " +
+              "go!");
       return;
     }
     stmt.execute("CREATE TABLE " + TABLE_NAME + "("
@@ -71,7 +91,8 @@ public class DatabaseHandler {
       stmt.execute(axn);
       return true;
     } catch (SQLException ex) {
-      JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Error Occurred", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Error" +
+              " Occurred", JOptionPane.ERROR_MESSAGE);
       System.out.println("Exception at execAction:databaseHandler " + ex.getLocalizedMessage());
       return false;
     }
@@ -79,7 +100,8 @@ public class DatabaseHandler {
 
   public boolean idExists(String id, String tableName) throws SQLException {
     stmt = conn.createStatement();
-    ResultSet rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE id='" + id + "'");
+    ResultSet rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE " +
+            "id='" + id + "'");
     return rs.next();
   }
 
@@ -89,7 +111,8 @@ public class DatabaseHandler {
     DatabaseMetaData dbm = conn.getMetaData();
     ResultSet tables = dbm.getTables(null, null, TABLE_NAME, null);
     if (tables.next()) {
-      System.out.println("Table " + TABLE_NAME + " already exists. Ready to go!");
+      System.out.println("Table " + TABLE_NAME + " already exists. Ready to " +
+              "go!");
       return;
     }
     stmt.execute("CREATE TABLE " + TABLE_NAME + "("
@@ -106,7 +129,8 @@ public class DatabaseHandler {
     DatabaseMetaData dbm = conn.getMetaData();
     ResultSet tables = dbm.getTables(null, null, TABLE_NAME, null);
     if (tables.next()) {
-      System.out.println("Table " + TABLE_NAME + " already exists. Ready to go!");
+      System.out.println("Table " + TABLE_NAME + " already exists. Ready to " +
+              "go!");
       return;
     }
     stmt.execute("CREATE TABLE " + TABLE_NAME + " ("
@@ -147,6 +171,53 @@ public class DatabaseHandler {
       return (count > 0);
     } catch (SQLException ex) {
       ex.printStackTrace();
+    }
+    return false;
+  }
+
+  public static boolean memberHasAnyBook(Member member) {
+    String query = "SELECT COUNT(*) FROM issues WHERE member_id = ?";
+    try {
+      PreparedStatement checkStmt = conn.prepareStatement(query);
+      checkStmt.setString(1, member.getId());
+      ResultSet rs = checkStmt.executeQuery();
+      if (!rs.next()) {
+        return false;
+      }
+      int count = rs.getInt(1);
+      System.out.println(count);
+      return (count > 0);
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+    return false;
+  }
+
+  public boolean updateBook(Book book) {
+    try {
+      String update = "UPDATE books SET title=?, author=?, publisher=? WHERE " +
+              "id=?";
+      PreparedStatement stmt = conn.prepareStatement(update);
+      stmt.setString(1, book.getTitle());
+      stmt.setString(2, book.getAuthor());
+      stmt.setString(3, book.getPublisher());
+      stmt.setString(4, book.getId());
+      int res = stmt.executeUpdate();
+      return (res > 0);
+    } catch (SQLException e) {
+      return false;
+    }
+  }
+
+  public boolean deleteMember(Member member) {
+    try {
+      String deleteStatement = "DELETE FROM members WHERE id=?";
+      PreparedStatement stmt = conn.prepareStatement(deleteStatement);
+      stmt.setString(1, member.getId());
+      int res = stmt.executeUpdate();
+      if (res == 1) return true;
+    } catch (SQLException ex) {
+      return false;
     }
     return false;
   }

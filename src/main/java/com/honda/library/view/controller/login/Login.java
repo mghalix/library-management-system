@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -34,7 +35,9 @@ public class Login implements Initializable {
     String username = txtUser.getText();
     String password = DigestUtils.sha1Hex(txtPass.getText());
     if (!username.equals(preferences.getUsername()) || !password.equals(preferences.getPassword())) {
-      AlertMaker.showErrorMessage("Invalid Credentials", "Wrong username or password, please try again");
+//      AlertMaker.showErrorMessage("Invalid Credentials", "Wrong username or password, please try again");
+      txtUser.getStyleClass().add("wrong-credentials");
+      txtPass.getStyleClass().add("wrong-credentials");
       return;
     }
     ((Stage) txtUser.getScene().getWindow()).close();
@@ -47,13 +50,20 @@ public class Login implements Initializable {
     stage.setTitle(title);
     stage.setScene(new Scene(parent));
     stage.show();
-    AssistantUtil.setStageIcon(stage);
+//    AssistantUtil.setStageIcon(stage);
   }
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     preferences = Preferences.getPreferences();
+    btnSignIn.setOnKeyPressed(keyEvent -> {
+      if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+        try {
+          btnSignIn_Click(new ActionEvent());
+        } catch (IOException e) {
+          System.out.println("error");
+        }
+      }
+    });
   }
-
-
 }

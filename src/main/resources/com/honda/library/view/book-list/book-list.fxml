@@ -6,25 +6,37 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="paneRoot" prefHeight="497.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.honda.library.view.controller.list_books.BookList">
-    <TableView fx:id="tblBookList" layoutX="144.0" layoutY="100.0" prefHeight="400.0" prefWidth="695.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane fx:id="paneRoot" prefHeight="497.0" prefWidth="773.0"
+            xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.honda.library.view.controller.list_books.BookList">
+    <TableView fx:id="tblBookList" layoutX="144.0" layoutY="100.0"
+               prefHeight="400.0" prefWidth="695.0"
+               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columns>
-            <TableColumn fx:id="colTitle" prefWidth="75.0" text="Title" />
-            <TableColumn fx:id="colID" prefWidth="75.0" text="Book ID" />
-            <TableColumn fx:id="colAuthor" prefWidth="75.0" text="Author" />
-            <TableColumn fx:id="colPublisher" prefWidth="75.0" text="Publisher" />
-            <TableColumn fx:id="colAvailability" prefWidth="75.0" text="Availability" />
+            <TableColumn fx:id="colTitle" prefWidth="75.0" text="Title"/>
+            <TableColumn fx:id="colID" prefWidth="75.0" text="Book ID"/>
+            <TableColumn fx:id="colAuthor" prefWidth="75.0" text="Author"/>
+            <TableColumn fx:id="colPublisher" prefWidth="75.0"
+                         text="Publisher"/>
+            <TableColumn fx:id="colAvailability" prefWidth="75.0"
+                         text="Availability"/>
         </columns>
         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
         </columnResizePolicy>
-      <contextMenu>
-         <ContextMenu>
-           <items>
-             <MenuItem mnemonicParsing="false" onAction="#mnuDelete" text="Delete" />
-               <MenuItem mnemonicParsing="false" onAction="#mnuEdit" text="Edit" />
-           </items>
-         </ContextMenu>
-      </contextMenu>
+        <contextMenu>
+            <ContextMenu>
+                <items>
+                    <MenuItem mnemonicParsing="false" onAction="#mnuRefresh"
+                              text="Refresh"/>
+                    <MenuItem mnemonicParsing="false" onAction="#mnuEdit"
+                              text="Edit"/>
+                    <MenuItem mnemonicParsing="false" onAction="#mnuDelete"
+                              text="Delete"/>
+                </items>
+            </ContextMenu>
+        </contextMenu>
     </TableView>
 </AnchorPane>

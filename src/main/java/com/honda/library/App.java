@@ -19,7 +19,7 @@ public class App extends Application {
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
     primaryStage.show();
-    AssistantUtil.setStageIcon(primaryStage);
+//    AssistantUtil.setStageIcon(primaryStage);
 
     // to reduce overhead time when clicking on buttons
     new Thread(() -> {
@@ -30,6 +30,7 @@ public class App extends Application {
       }
     }).start();
   }
+
   public static void main(String[] args) {
     launch(args);
   }
