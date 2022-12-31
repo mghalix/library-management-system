@@ -1,0 +1,56 @@
+* {
+    -fx-primary: #0A0D12;
+    /*-fx-secondary: #FFFF8D;*/
+    -fx-secondary: #512DA8;
+
+    -fx-primarytext: #343434;
+    -fx-primaryicons: #9b9b9b;
+    -fx-red: #FF0000;
+}
+
+.root {
+    -fx-background-color: -fx-primary;
+    -fx-background-size: 100% 100%;
+}
+
+.icons {
+    -fx-fill: -fx-primaryicons;
+}
+
+.button {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+    -fx-text-fill: -fx-primaryicons;
+}
+
+/* Login Screen Specific */
+.login-button {
+    -fx-border-color: -fx-secondary;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-width: 2px;
+    -fx-background-color: transparent;
+}
+
+.button:hover {
+    -fx-background-color: #512DA8;
+    -fx-text-fill: white;
+}
+
+.text-field {
+    -fx-text-fill: -fx-primarytext;
+    -fx-font-size: 13pt;
+    -jfx-focus-color: -fx-secondary;
+}
+
+.wrong-credentials {
+    /*-jfx-unfocus-color: red !important;*/
+    -jfx-focus-color: red !important;
+    /*-fx-font-size: 13pt;*/
+}
+
+#pnRoot {
+    /*-fx-background-color: rgba(0, 0, 0, 0.3);*/
+    -fx-background-image: url(./../images/book-read-reading-books.jpg);
+    -fx-background-size: 100%;
+    -fx-border-radius: 50;
+}
